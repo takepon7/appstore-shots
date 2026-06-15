@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="7" fill="#2563eb"/>
+  <!-- device frame -->
+  <rect x="10.5" y="5.5" width="11" height="21" rx="3" fill="#111111"/>
+  <rect x="12" y="7" width="8" height="18" rx="1.6" fill="#ffffff"/>
+  <!-- headline accent bar -->
+  <rect x="13.4" y="9" width="5.2" height="2.1" rx="1" fill="#fde047"/>
+  <!-- content lines -->
+  <rect x="13.4" y="12.4" width="5.2" height="1.3" rx="0.6" fill="#cbd5e1"/>
+  <rect x="13.4" y="14.7" width="3.6" height="1.3" rx="0.6" fill="#cbd5e1"/>
+</svg>
