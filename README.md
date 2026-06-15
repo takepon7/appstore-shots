@@ -12,6 +12,15 @@ wants. No Figma, no design skills, just a small JSON file.
 
 <p align="center"><sub>Left: a raw screenshot. Right: rendered by appstore-shots (1290×2796, ready to upload).</sub></p>
 
+## Two ways to use it
+
+- **Web app — no install, no terminal.** Drag in your screenshots, type the
+  headlines, pick colors, download. Everything runs in your browser; images are
+  never uploaded anywhere. → see [`web/`](web/) (deploy to Vercel, or run
+  `cd web && npm install && npm run dev`).
+- **CLI — for developers.** Version-control a `spec.json` and regenerate the
+  whole set in seconds. See below.
+
 ## Why
 
 Making App Store screenshots usually means fighting a design tool for an
