@@ -231,3 +231,42 @@ select, .btn {
 .card-actions { display: flex; gap: 8px; margin-left: auto; }
 .linklike { background: none; border: none; color: var(--muted); cursor: pointer; font: inherit; font-size: 13px; }
 .linklike:hover { color: #dc2626; }
+
+/* ---- landing sections ---- */
+.section { margin-top: 72px; text-align: center; }
+.section-title { font-size: 26px; margin: 0 0 10px; letter-spacing: -0.01em; }
+.section-lede { color: var(--muted); margin: 0 auto 28px; max-width: 620px; line-height: 1.6; font-size: 15px; }
+
+.feature-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; text-align: left;
+}
+.feature {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
+}
+.feature-t { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.feature-d { color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+@media (max-width: 720px) { .feature-grid { grid-template-columns: 1fr; } }
+
+.support { margin-top: 80px; padding: 44px 20px 8px; text-align: center; border-top: 1px solid var(--border); }
+.support .heart { color: #e0245e; }
+.support-buttons { display: flex; gap: 12px; justify-content: center; margin: 22px 0 18px; flex-wrap: wrap; }
+
+.star-btn, .sponsor-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 600; text-decoration: none;
+  padding: 10px 16px; border-radius: 10px; border: 1px solid var(--border);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.star-btn:hover, .sponsor-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.star-btn { background: #fff; color: var(--text); }
+.star-btn svg { color: #eab308; }
+.star-btn .count {
+  margin-left: 4px; padding-left: 10px; border-left: 1px solid var(--border);
+  color: var(--muted); font-variant-numeric: tabular-nums;
+}
+.sponsor-btn { background: #fff; color: #bf3989; border-color: #f0c9df; }
+.sponsor-btn svg { color: #db61a2; }
+
+.give-star { color: var(--muted); font-size: 14px; font-style: italic; margin-top: 6px; }
+.repo-link { display: inline-block; margin-top: 8px; color: var(--brand); font-size: 13px; text-decoration: none; }
+.repo-link:hover { text-decoration: underline; }

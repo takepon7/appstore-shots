@@ -12,6 +12,8 @@ import {
 } from "@/lib/devices";
 import { triggerDownload, zipAndDownload } from "@/lib/export";
 import { frameToPng } from "@/lib/canvasRender";
+import Features from "@/components/Features";
+import SupportSection from "@/components/SupportSection";
 
 const PREVIEW_W = 188; // px on screen; the real node stays at logical size
 
@@ -313,6 +315,9 @@ export default function Page() {
           </div>
         ))}
       </div>
+
+      <Features />
+      <SupportSection />
     </main>
   );
 }
