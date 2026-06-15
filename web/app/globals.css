@@ -117,21 +117,35 @@ body {
 
 .toolbar {
   position: sticky; top: 0; z-index: 20;
-  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
   background: rgba(244, 245, 247, 0.85);
   backdrop-filter: blur(8px);
   padding: 12px 0; margin-bottom: 18px;
   border-bottom: 1px solid var(--border);
 }
 .toolbar .group { display: flex; align-items: center; gap: 8px; }
-.toolbar label { font-size: 13px; color: var(--muted); }
+.toolbar .label { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+/* size sample: a small aspect-correct device silhouette + description */
+.size-sample { display: flex; align-items: center; gap: 9px; }
+.silhouette {
+  height: 38px; border: 2px solid #c2c7d0; border-radius: 6px; background: #fff;
+  flex: none;
+}
+.silhouette.tablet { border-radius: 5px; }
+.size-sample .meta { display: flex; flex-direction: column; line-height: 1.25; }
+.size-sample .meta b { font-size: 13px; }
+.size-sample .meta small { font-size: 11px; color: var(--muted); }
+
 .palettes { display: flex; gap: 6px; }
 .swatch {
-  width: 26px; height: 26px; border-radius: 7px; cursor: pointer;
+  width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.12); padding: 0; position: relative;
+  transition: transform 0.1s, box-shadow 0.1s;
 }
+.swatch:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.18); }
 .swatch span {
-  position: absolute; right: 3px; bottom: 3px; width: 8px; height: 8px;
+  position: absolute; right: 3px; bottom: 3px; width: 9px; height: 9px;
   border-radius: 2px;
 }
 .spacer { flex: 1; }
@@ -146,13 +160,37 @@ select, .btn {
 .btn-ghost { background: transparent; }
 
 .dropzone {
-  border: 2px dashed var(--border); border-radius: 16px;
-  padding: 44px 20px; text-align: center; color: var(--muted);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 2px dashed #c7ccd6; border-radius: 16px;
+  padding: 40px 20px; text-align: center; color: var(--muted);
   background: #fff; cursor: pointer; transition: border-color 0.15s, background 0.15s;
 }
+.dropzone:hover { border-color: #9aa3b2; }
 .dropzone.drag { border-color: var(--brand); background: #eef3ff; }
-.dropzone strong { color: var(--text); display: block; font-size: 16px; margin-bottom: 6px; }
+.dropzone .icon {
+  width: 44px; height: 44px; border-radius: 12px; background: #eef3ff;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+  color: var(--brand);
+}
+.dropzone strong { color: var(--text); font-size: 16px; margin-bottom: 4px; }
 .dropzone input { display: none; }
+
+/* empty-state usage guide */
+.guide {
+  list-style: none; counter-reset: step; margin: 22px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.guide li {
+  counter-increment: step; background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 16px 16px 16px 52px; position: relative;
+  font-size: 14px; line-height: 1.5; color: var(--text);
+}
+.guide li::before {
+  content: counter(step); position: absolute; left: 16px; top: 16px;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--brand); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+}
+@media (max-width: 640px) { .guide { grid-template-columns: 1fr; } }
 
 .cards { display: flex; flex-direction: column; gap: 16px; margin-top: 18px; }
 .card {

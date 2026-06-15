@@ -137,7 +137,7 @@ export default function Page() {
 
       <div className="toolbar">
         <div className="group">
-          <label htmlFor="device">サイズ</label>
+          <span className="label">サイズ</span>
           <select id="device" value={deviceKey} onChange={(e) => setDeviceKey(e.target.value as DeviceKey)}>
             {Object.entries(DEVICES).map(([k, d]) => (
               <option key={k} value={k}>
@@ -145,15 +145,25 @@ export default function Page() {
               </option>
             ))}
           </select>
+          <div className="size-sample" aria-hidden>
+            <div
+              className={`silhouette ${device.kind}`}
+              style={{ width: Math.round((38 * device.w) / device.h) }}
+            />
+            <div className="meta">
+              <b>{device.px}</b>
+              <small>{device.desc}</small>
+            </div>
+          </div>
         </div>
         <div className="group">
-          <label>配色</label>
+          <span className="label">配色</span>
           <div className="palettes">
             {PALETTES.map((p) => (
               <button
                 key={p.name}
                 className="swatch"
-                title={p.name}
+                title={`${p.name}（クリックで全体に適用）`}
                 style={{ background: p.background }}
                 onClick={() => applyPalette(p)}
               >
@@ -161,6 +171,7 @@ export default function Page() {
               </button>
             ))}
           </div>
+          <span className="hint">クリックで全体に適用</span>
         </div>
         <div className="spacer" />
         <button className="btn btn-primary" disabled={busy || frames.length === 0} onClick={downloadAll}>
@@ -181,6 +192,13 @@ export default function Page() {
           addFiles(e.dataTransfer.files);
         }}
       >
+        <span className="icon" aria-hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 16V4" />
+            <path d="m6 10 6-6 6 6" />
+            <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+          </svg>
+        </span>
         <strong>スクショをドラッグ＆ドロップ</strong>
         クリックして選択もできます（PNG / JPG・複数可）
         <input
@@ -193,6 +211,14 @@ export default function Page() {
           }}
         />
       </label>
+
+      {frames.length === 0 && (
+        <ol className="guide">
+          <li>アプリのスクショをアップロード（あとから何枚でも追加・削除できます）</li>
+          <li>見出しを入力し、テンプレートと配色を選ぶ。プレビューがその場で更新されます</li>
+          <li>「この1枚」または「全部ダウンロード」で、App Store規定サイズのPNGを保存</li>
+        </ol>
+      )}
 
       <div className="cards">
         {frames.map((f, i) => (

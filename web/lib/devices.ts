@@ -9,12 +9,14 @@ export interface Device {
   scale: number;
   label: string;
   px: string;
+  desc: string;
+  kind: "phone" | "tablet";
 }
 
 export const DEVICES: Record<DeviceKey, Device> = {
-  "iphone-6.9": { w: 430, h: 932, scale: 3, label: "6.9\"", px: "1290×2796" },
-  "iphone-6.5": { w: 414, h: 896, scale: 3, label: "6.5\"", px: "1242×2688" },
-  "ipad-13": { w: 1032, h: 1376, scale: 2, label: "iPad 13\"", px: "2064×2752" },
+  "iphone-6.9": { w: 430, h: 932, scale: 3, label: "6.9\"", px: "1290×2796", desc: "iPhone 16 Pro Max など", kind: "phone" },
+  "iphone-6.5": { w: 414, h: 896, scale: 3, label: "6.5\"", px: "1242×2688", desc: "iPhone 11 Pro Max など", kind: "phone" },
+  "ipad-13": { w: 1032, h: 1376, scale: 2, label: "iPad 13\"", px: "2064×2752", desc: "iPad Pro 13インチ", kind: "tablet" },
 };
 
 // Screen aspect ratio used by the CSS device frame (iPhone Pro Max).
