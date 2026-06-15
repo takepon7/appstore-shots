@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 
 const REPO = "takepon7/appstore-shots";
 const REPO_URL = `https://github.com/${REPO}`;
-const SPONSOR_URL = "https://github.com/sponsors/takepon7";
+// Support link. GitHub Sponsors（承認後に戻せる）: https://github.com/sponsors/takepon7
+const SUPPORT_URL = "https://buymeacoffee.com/takepon7";
 
 export default function SupportSection() {
   const [stars, setStars] = useState<number | null>(null);
@@ -26,7 +27,7 @@ export default function SupportSection() {
         Open Source <span className="heart">❤</span>
       </h2>
       <p className="section-lede">
-        appstore-shots はオープンソースです。役に立ったら、Star やスポンサーで応援してもらえると、
+        appstore-shots はオープンソースです。役に立ったら、Star や差し入れで応援してもらえると、
         開発を続けやすくなります。
       </p>
 
@@ -39,11 +40,15 @@ export default function SupportSection() {
           {stars !== null && <span className="count">{stars.toLocaleString()}</span>}
         </a>
 
-        <a className="sponsor-btn" href={SPONSOR_URL} target="_blank" rel="noreferrer">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
-            <path d="M8 14.25.345 6.575a3.25 3.25 0 1 1 4.6-4.595L8 5.05l3.055-3.07a3.25 3.25 0 1 1 4.6 4.595L8 14.25Z" />
+        <a className="coffee-btn" href={SUPPORT_URL} target="_blank" rel="noreferrer">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8Z" />
+            <line x1="6" x2="6" y1="2" y2="4" />
+            <line x1="10" x2="10" y1="2" y2="4" />
+            <line x1="14" x2="14" y1="2" y2="4" />
           </svg>
-          Sponsor
+          コーヒーをおごる
         </a>
       </div>
 
