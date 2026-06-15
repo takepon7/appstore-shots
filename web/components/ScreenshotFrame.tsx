@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Device, SCREEN_RATIO, TemplateKey } from "@/lib/devices";
+import { Device, frameSize, TemplateKey } from "@/lib/devices";
 import { HeadlineContent } from "@/lib/headline";
 
 export interface FrameData {
@@ -15,7 +15,6 @@ export interface FrameData {
   headlineFont: string;
   headlineSize: number;
   frameColor: string;
-  deviceWidth: number;
 }
 
 interface Props {
@@ -31,11 +30,9 @@ const ScreenshotFrame = forwardRef<HTMLDivElement, Props>(function ScreenshotFra
   ref
 ) {
   const f = frame;
-  const dw = f.deviceWidth;
-  const dh = Math.round(dw * SCREEN_RATIO);
-  // headline-bottom caps the phone so the full frame + headline always fit.
-  const cappedW = f.template === "headline-bottom" ? Math.min(dw, 282) : dw;
-  const cappedH = Math.round(cappedW * SCREEN_RATIO);
+  // Frame size derives from the selected device, so an iPad renders as an iPad.
+  const { w: dw, h: dh } = frameSize(device, f.template);
+  const isPhone = device.kind === "phone";
 
   const stageStyle: React.CSSProperties = {
     width: device.w,
@@ -53,7 +50,7 @@ const ScreenshotFrame = forwardRef<HTMLDivElement, Props>(function ScreenshotFra
 
   const Device = ({ w, h }: { w: number; h: number }) => (
     <div className="asf-device" style={{ width: w, height: h, borderColor: f.frameColor, background: f.frameColor }}>
-      <div className="asf-island" />
+      {isPhone && <div className="asf-island" />}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="asf-screen" src={f.image} alt="" />
     </div>
@@ -83,7 +80,7 @@ const ScreenshotFrame = forwardRef<HTMLDivElement, Props>(function ScreenshotFra
 
       {f.template === "headline-bottom" && (
         <>
-          <Device w={cappedW} h={cappedH} />
+          <Device w={dw} h={dh} />
           <div className="asf-headline-block">
             <Headline />
           </div>

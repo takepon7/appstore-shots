@@ -1,4 +1,4 @@
-import { Device } from "./devices";
+import { Device, frameSize } from "./devices";
 import type { FrameData } from "@/components/ScreenshotFrame";
 
 // Export path. Instead of rasterizing the DOM (SVG foreignObject hangs on large
@@ -161,7 +161,8 @@ function drawDevice(
   x: number,
   y: number,
   w: number,
-  h: number
+  h: number,
+  island: boolean
 ) {
   const border = 11;
   // body + soft shadow
@@ -183,11 +184,13 @@ function drawDevice(
   ctx.clip();
   drawImageCover(ctx, img, sx, sy, sw, sh);
   ctx.restore();
-  // dynamic island (CSS: top:12 inside the 11px border)
-  const iw = Math.min(w * 0.3, 108);
-  ctx.fillStyle = "#0a0a0a";
-  roundRectPath(ctx, x + (w - iw) / 2, y + border + 12, iw, 26, 16);
-  ctx.fill();
+  // dynamic island (phones only — iPad has none)
+  if (island) {
+    const iw = Math.min(w * 0.3, 108);
+    ctx.fillStyle = "#0a0a0a";
+    roundRectPath(ctx, x + (w - iw) / 2, y + border + 12, iw, 26, 16);
+    ctx.fill();
+  }
 }
 
 function drawShot(
@@ -222,8 +225,6 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
-const SCREEN_RATIO = 2796 / 1290;
-
 export async function frameToPng(frame: FrameData, device: Device): Promise<string> {
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
   const img = await loadImage(frame.image);
@@ -240,8 +241,9 @@ export async function frameToPng(frame: FrameData, device: Device): Promise<stri
 
   const centerX = device.w / 2;
   const maxWidth = device.w - PAD_X * 2;
-  const dw = frame.deviceWidth;
-  const dh = Math.round(dw * SCREEN_RATIO);
+  // Frame size derives from the selected device (iPad renders as an iPad).
+  const { w: dw, h: dh } = frameSize(device, frame.template);
+  const island = device.kind === "phone";
   const layout = layoutText(ctx, frame, maxWidth);
 
   switch (frame.template) {
@@ -249,7 +251,7 @@ export async function frameToPng(frame: FrameData, device: Device): Promise<stri
       const top = 96;
       drawHeadlineBlock(ctx, frame, layout, top, centerX);
       const dy = top + layout.height + 56;
-      drawDevice(ctx, frame, img, (device.w - dw) / 2, dy, dw, dh);
+      drawDevice(ctx, frame, img, (device.w - dw) / 2, dy, dw, dh, island);
       break;
     }
     case "full-bleed": {
@@ -260,17 +262,15 @@ export async function frameToPng(frame: FrameData, device: Device): Promise<stri
       break;
     }
     case "headline-bottom": {
-      const cw = Math.min(dw, 282);
-      const ch = Math.round(cw * SCREEN_RATIO);
-      const total = ch + 52 + layout.height;
+      const total = dh + 52 + layout.height;
       const top = Math.max(40, (device.h - total) / 2);
-      drawDevice(ctx, frame, img, (device.w - cw) / 2, top, cw, ch);
-      drawHeadlineBlock(ctx, frame, layout, top + ch + 52, centerX);
+      drawDevice(ctx, frame, img, (device.w - dw) / 2, top, dw, dh, island);
+      drawHeadlineBlock(ctx, frame, layout, top + dh + 52, centerX);
       break;
     }
     case "headline-overlay": {
       const dy = device.h + 90 - dh;
-      drawDevice(ctx, frame, img, (device.w - dw) / 2, dy, dw, dh);
+      drawDevice(ctx, frame, img, (device.w - dw) / 2, dy, dw, dh, island);
       drawHeadlineBlock(ctx, frame, layout, 88, centerX);
       break;
     }

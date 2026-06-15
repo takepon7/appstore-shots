@@ -11,16 +11,26 @@ export interface Device {
   px: string;
   desc: string;
   kind: "phone" | "tablet";
+  // Device-frame geometry (logical px): screen height/width ratio + default
+  // frame width. Derived from each device so the mockup matches what's selected.
+  screenRatio: number;
+  frameW: number;
 }
 
 export const DEVICES: Record<DeviceKey, Device> = {
-  "iphone-6.9": { w: 430, h: 932, scale: 3, label: "6.9\"", px: "1290×2796", desc: "iPhone 16 Pro Max など", kind: "phone" },
-  "iphone-6.5": { w: 414, h: 896, scale: 3, label: "6.5\"", px: "1242×2688", desc: "iPhone 11 Pro Max など", kind: "phone" },
-  "ipad-13": { w: 1032, h: 1376, scale: 2, label: "iPad 13\"", px: "2064×2752", desc: "iPad Pro 13インチ", kind: "tablet" },
+  "iphone-6.9": { w: 430, h: 932, scale: 3, label: "6.9\"", px: "1290×2796", desc: "iPhone 16 Pro Max など", kind: "phone", screenRatio: 2796 / 1290, frameW: 330 },
+  "iphone-6.5": { w: 414, h: 896, scale: 3, label: "6.5\"", px: "1242×2688", desc: "iPhone 11 Pro Max など", kind: "phone", screenRatio: 2688 / 1242, frameW: 318 },
+  "ipad-13": { w: 1032, h: 1376, scale: 2, label: "iPad 13\"", px: "2064×2752", desc: "iPad Pro 13インチ", kind: "tablet", screenRatio: 2752 / 2064, frameW: 800 },
 };
 
-// Screen aspect ratio used by the CSS device frame (iPhone Pro Max).
-export const SCREEN_RATIO = 2796 / 1290;
+// Device-frame size for a given template, derived from the selected device so
+// an iPad renders as an iPad (wider, ~3:4) and an iPhone as a tall phone.
+export function frameSize(device: Device, template: TemplateKey) {
+  let w = device.frameW;
+  if (template === "headline-overlay") w = Math.round(device.frameW * 1.09);
+  if (template === "headline-bottom" && device.kind === "phone") w = Math.min(w, 282);
+  return { w, h: Math.round(w * device.screenRatio) };
+}
 
 export type TemplateKey =
   | "headline-top"

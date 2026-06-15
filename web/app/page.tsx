@@ -25,7 +25,6 @@ interface Defaults {
   headlineFont: string;
   headlineSize: number;
   frameColor: string;
-  deviceWidth: number;
 }
 
 const INITIAL_DEFAULTS: Defaults = {
@@ -36,7 +35,6 @@ const INITIAL_DEFAULTS: Defaults = {
   headlineFont: "Hiragino Sans",
   headlineSize: 78,
   frameColor: "#111111",
-  deviceWidth: 330,
 };
 
 let counter = 0;
@@ -75,7 +73,6 @@ export default function Page() {
               headlineFont: defaults.headlineFont,
               headlineSize: defaults.headlineSize,
               frameColor: defaults.frameColor,
-              deviceWidth: defaults.deviceWidth,
             },
           ]);
         };
