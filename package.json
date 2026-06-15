@@ -1,0 +1,39 @@
+{
+  "name": "appstore-shots",
+  "version": "0.1.0",
+  "description": "Generate App Store screenshots — bold headline + device frame + colored background — from your raw app screenshots. No design tools.",
+  "type": "module",
+  "bin": {
+    "appstore-shots": "bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "templates",
+    "examples/spec.example.json"
+  ],
+  "scripts": {
+    "postinstall": "node -e \"console.log('\\n  appstore-shots installed. One more step:\\n    npx playwright install chromium\\n')\""
+  },
+  "keywords": [
+    "app-store",
+    "screenshots",
+    "ios",
+    "indie",
+    "marketing",
+    "playwright"
+  ],
+  "author": "takepon7",
+  "license": "MIT",
+  "homepage": "https://github.com/takepon7/appstore-shots",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/takepon7/appstore-shots.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

@@ -1,0 +1,5 @@
+node_modules/
+appstore-output/
+*.log
+.DS_Store
+spec.local.json

@@ -1,0 +1,20 @@
+{
+  "device": "iphone-6.9",
+  "outDir": "appstore-output",
+  "defaults": {
+    "background": "#2563eb",
+    "accent": "#fde047",
+    "foreground": "#ffffff",
+    "headlineFont": "Hiragino Sans",
+    "headlineSize": 78,
+    "frameColor": "#111111",
+    "deviceWidth": 330,
+    "template": "headline-top"
+  },
+  "frames": [
+    { "screenshot": "screenshots/home.png", "headline": "Know yourself\nin **3 minutes**" },
+    { "screenshot": "screenshots/result.png", "headline": "See your\n**strengths**", "template": "headline-top" },
+    { "screenshot": "screenshots/journal.png", "headline": "**Reflect**\nevery day", "template": "headline-bottom", "headlineSize": 66 },
+    { "screenshot": "screenshots/share.png", "headline": "**Share** your\nresults", "template": "headline-overlay", "deviceWidth": 360, "background": "#0f172a", "accent": "#38bdf8" }
+  ]
+}

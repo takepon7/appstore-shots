@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "appstore-shots",
+  "description": "App Store screenshot generator for indie developers.",
+  "owner": {
+    "name": "takepon7"
+  },
+  "plugins": [
+    {
+      "name": "appstore-shots",
+      "description": "Generate App Store screenshots — bold headline + device frame + colored background — from raw app screenshots, at exact App Store Connect pixel sizes.",
+      "author": {
+        "name": "takepon7"
+      },
+      "category": "design",
+      "source": ".",
+      "homepage": "https://github.com/takepon7/appstore-shots"
+    }
+  ]
+}

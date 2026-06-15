@@ -1,0 +1,8 @@
+{
+  "name": "appstore-shots",
+  "description": "Generate App Store screenshots — bold headline + device frame + colored background — from raw app screenshots, at exact App Store Connect pixel sizes.",
+  "author": {
+    "name": "takepon7"
+  },
+  "homepage": "https://github.com/takepon7/appstore-shots"
+}

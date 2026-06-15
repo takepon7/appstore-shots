@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8">{{STYLE}}
+<style>
+  /* Whole phone visible up top, headline below. The device is capped so the
+     full frame + headline always fit the canvas. */
+  .stage { justify-content: center; gap: 52px; padding: 40px 0; }
+  .device { width: min(var(--device-width, 330px), 282px); }
+  .headline-block { flex: none; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="device"><img class="device-screen" src="{{SCREENSHOT}}"></div>
+    <div class="headline-block">
+      <div class="headline">{{HEADLINE}}</div>
+      {{SUBHEAD}}
+    </div>
+  </div>
+</body>
+</html>

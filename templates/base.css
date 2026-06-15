@@ -1,0 +1,91 @@
+/* Shared layout + CSS device frame for App Store screenshot templates.
+   All sizes are in CSS px == logical points; render.mjs multiplies by
+   deviceScaleFactor to reach the exact App Store pixel size. */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; }
+
+body {
+  font-family: var(--headline-font), "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background: var(--bg);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---- Headline ---- */
+.headline {
+  font-weight: 900;
+  color: var(--fg);
+  text-align: center;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  font-size: var(--headline-size, 78px);
+  padding: 0 28px;
+  text-wrap: balance;
+}
+.headline .accent { color: var(--accent); }
+
+.subhead {
+  margin-top: 18px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--fg);
+  opacity: 0.92;
+  text-align: center;
+  padding: 0 36px;
+}
+
+/* ---- CSS device frame (rounded body + screen + Dynamic Island) ---- */
+.device {
+  position: relative;
+  width: var(--device-width, 330px);
+  aspect-ratio: 1290 / 2796;          /* iPhone Pro Max screen ratio */
+  border: 11px solid var(--frame-color, #111);
+  border-radius: 54px;
+  background: var(--frame-color, #111);
+  box-shadow: 0 26px 64px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  flex: none;
+}
+.device-screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 44px;
+}
+.device::after {            /* Dynamic Island */
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  max-width: 108px;
+  height: 26px;
+  background: #0a0a0a;
+  border-radius: 16px;
+  z-index: 3;
+}
+
+/* Caption used by full-bleed (no device frame) */
+.caption {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--fg);
+  opacity: 0.85;
+  text-align: center;
+  padding: 0 40px;
+}
