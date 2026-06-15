@@ -5,6 +5,10 @@ device frame, colored background — at the exact pixel sizes App Store Connect
 wants. No Figma, no design skills, just a small JSON file.
 
 <p align="center">
+  <img src="docs/demo.gif" width="82%" alt="appstore-shots demo — drop a screenshot, type a headline, pick colors, download">
+</p>
+
+<p align="center">
   <img src="docs/before.png" width="40%" alt="before: raw screenshot">
   &nbsp;&nbsp;➡&nbsp;&nbsp;
   <img src="docs/after.png" width="40%" alt="after: App Store screenshot">
